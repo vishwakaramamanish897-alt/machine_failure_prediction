@@ -43,8 +43,7 @@ if st.button("Predict Machine Status"):
     prediction = model.predict(df)
 
     if prediction[0] == 1:
-        st.error("⚠️ Machine Will Fail")
+        st.error(" Machine Will Fail")
     else:
-        st.success("✅ Machine Will Work Properly")
-    else:
-        st.success("Machine will work")
+        st.success(" Machine Will Work Properly")
+ 
