@@ -42,6 +42,7 @@ df = pd.DataFrame({
 
 if st.button("predict"):
   prediction = model.predict(df)
-  st.error("Machine will fail")
+  if prediction[0] == 1: 
+    st.error("Machine will fail")
   else:
     st.success("Machine will work")
