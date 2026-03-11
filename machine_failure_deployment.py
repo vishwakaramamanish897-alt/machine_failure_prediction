@@ -26,7 +26,7 @@ CS = st.number_input("CS")
 VOC = st.number_input("VOC")
 RP = st.number_input("RP")
 IP = st.number_input("IP")
-Temperature = st.number_input("Temperature")
+temperature = st.number_input("Temperature")
 
 df = pd.DataFrame({
     "footfall":[footfall],
@@ -36,7 +36,7 @@ df = pd.DataFrame({
     "VOC":[VOC],
     "RP":[RP],
     "IP":[IP],
-    "Temperature":[Temperature]
+    "Temperature":[temperature]
 
 })
 
