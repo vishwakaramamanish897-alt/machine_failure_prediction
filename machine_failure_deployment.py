@@ -1,41 +1,50 @@
-
-
 import streamlit as st
 import pandas as pd
-import  joblib
+import joblib
 
-
+# Load model
 model = joblib.load("machine_failure_predication_model.pkl")
 
-st.title("Machine failure prediction system")
+st.title("⚙️ Machine Failure Prediction System")
 
-st.write("you can enter the data from senson and check whether your machine will work or fail under certain condition")
+st.write("Enter sensor values to predict machine status.")
 
-footfall = st.number_input("footfall")
-tempMode = st.number_input("tempMode")
-aq = st.number_input("AQ")
-uss = st.number_input("USS")
-cs = st.number_input("CS")
-voc = st.number_input("VOC")
-rp = st.number_input("RP")
-ip = st.number_input("IP")
-temperature = st.number_input("Temperature")
+# Inputs
+footfall = st.number_input("Footfall", value=0)
+tempMode = st.number_input("Temp Mode", value=0)
+AQ = st.number_input("AQ", value=0)
+USS = st.number_input("USS", value=0)
+CS = st.number_input("CS", value=0)
+VOC = st.number_input("VOC", value=0)
+RP = st.number_input("RP", value=0)
+IP = st.number_input("IP", value=0)
+Temperature = st.number_input("Temperature", value=0)
 
-df = pd.DataFrame({
-    "footfall":[footfall],
-    "tempMode":[tempMode],
-    "AQ":[aq],
-    "USS":[uss],
-    "VOC":[voc],
-    "RP":[rp],
-    "IP":[ip],
-    "Temperature":[temperature]
+# Create dataframe with correct column order
+data = [[footfall, tempMode, AQ, USS, CS, VOC, RP, IP, Temperature]]
 
-})
+columns = [
+    "footfall",
+    "tempMode",
+    "AQ",
+    "USS",
+    "CS",
+    "VOC",
+    "RP",
+    "IP",
+    "Temperature"
+]
 
-if st.button("predict"):
+df = pd.DataFrame(data, columns=columns)
+
+# Prediction
+if st.button("Predict Machine Status"):
+
     prediction = model.predict(df)
-    if prediction[0] == 1: 
-        st.error("Machine will fail")
+
+    if prediction[0] == 1:
+        st.error("⚠️ Machine Will Fail")
+    else:
+        st.success("✅ Machine Will Work Properly")
     else:
         st.success("Machine will work")
